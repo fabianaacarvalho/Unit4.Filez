@@ -7,14 +7,6 @@ console.log("🌱 Database seeded.");
 
 const folders = [{ name: "Folder1" }, { name: "Folder2" }, { name: "Folder3" }];
 
-// const files = [
-//   { name: "file1.pdf", size: 1024 },
-//   { name: "file2.txt", size: 256 },
-//   { name: "file3.md", size: 128 },
-//   { name: "file4.docx", size: 512 },
-//   { name: "file5.csv", size: 2048 },
-// ];
-
 async function seed() {
   await db.query("DELETE FROM files");
   await db.query("DELETE FROM folders");
