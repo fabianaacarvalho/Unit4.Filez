@@ -10,7 +10,6 @@
     "test": "vitest",
     "test:database": "vitest database",
     "test:server": "vitest server",
-    "test:seeded": "npm run db:seed && vitest",
     "db:schema": "psql -d filez -f db/schema.sql",
     "db:seed": "node --env-file=.env db/seed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
