@@ -10,6 +10,7 @@
     "test": "vitest",
     "test:database": "vitest database",
     "test:server": "vitest server",
+    "test:seeded": "npm run db:seed && vitest",
     "db:schema": "psql -d filez -f db/schema.sql",
     "db:seed": "node --env-file=.env db/seed.js",
     "db:reset": "npm run db:schema && npm run db:seed"
@@ -19,6 +20,7 @@
     "pg": "^8.14.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
     "supertest": "^7.1.0",
     "vitest": "^3.1.2"
   },
