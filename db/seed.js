@@ -1,31 +1,18 @@
 import db from "#db/client";
 
+import { createFile } from "#db/queries/files";
+import { createFolder } from "#db/queries/folders";
+
 await db.connect();
 await seed();
 await db.end();
 console.log("🌱 Database seeded.");
 
-const folders = [{ name: "Folder1" }, { name: "Folder2" }, { name: "Folder3" }];
-
 async function seed() {
-  await db.query("DELETE FROM files");
-  await db.query("DELETE FROM folders");
-
-  // Insert folders
-  for (const folder of folders) {
-    const {
-      rows: [f],
-    } = await db.query(`INSERT INTO folders (name) VALUES ($1) RETURNING *`, [
-      folder.name,
-    ]);
-
-    // Insert files into each folder
-    for (let i = 1; i <= 5; i++) {
-      await db.query(
-        `INSERT INTO files (name, size, folder_id)
-       VALUES ($1, $2, $3)`,
-        [`${folder.name}_file${i}.txt`, i * 100, f.id]
-      );
+  for (let i = 1; i <= 3; i++) {
+    const folder = await createFolder("Folder " + i);
+    for (let j = 1; j <= 5; j++) {
+      await createFile("File " + j, 1000 * j, folder.id);
     }
   }
 }
